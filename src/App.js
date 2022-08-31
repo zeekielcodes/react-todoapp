@@ -1,24 +1,81 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useReducer, useState } from "react";
+import AddTask from "./components/AddTask";
+import Tasks from "./components/Tasks";
+import { TaskContext } from "./components/Context";
 
 function App() {
+  const [newTask, addNewTask] = useState(false);
+
+  useEffect(() => {
+    document.title = "The Face React Task App";
+  });
+
+  const reducer = (state, action) => {
+    if (action.type === "EMPTY") {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent: "Task cannot be empty",
+      };
+    }
+
+    if (action.type === "ADDED") {
+      console.log(state);
+      const tasksUpdate = [...state.taskslog, action.payload];
+      return {
+        //  [...state, action.payload],
+        // ...state,
+        taskslog: tasksUpdate,
+        isModalOpen: true,
+        modalContent: "Task added",
+      };
+    }
+
+    if (action.type === "CLOSE") {
+      return {
+        ...state,
+        isModalOpen: false,
+      };
+    }
+
+    if (action.type === "REMOVE") {
+      // const newTasks = action.payload;
+      return {
+        ...state,
+
+        taskslog: state.taskslog.filter((task) => task.id !== action.payload),
+      };
+    }
+  };
+
+  const initialstate = {
+    newtask: "",
+    taskslog: [],
+    // taskslist: taskslist,
+    isModalOpen: false,
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <TaskContext.Provider value={useReducer(reducer, initialstate)}>
+      <div className="sm:w-full md:w-4/5 lg:w-3/5  border-2 border-black p-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl text-blue-600">The Face To-do App</h2>
+          <button
+            onClick={() => addNewTask(!newTask)}
+            className="text-white bg-green-500 px-4 py-2 rounded"
+          >
+            {newTask ? "Close" : "Add To-do"}
+          </button>
+        </div>
+        {newTask && <AddTask />}
+        <div className="border-2 border-black p-4 mt-6">
+          <Tasks />
+        </div>{" "}
+        <p className="text-center text-gray-400 mt-4 italic">
+          &copy; 2022, All rights reserved. The Face To-do App
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      </div>
+    </TaskContext.Provider>
   );
 }
 
