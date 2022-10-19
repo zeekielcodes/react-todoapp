@@ -13,7 +13,7 @@ export default function AddTask() {
       }, 2000);
     });
     return (
-      <span className="bg-blue-600 text-white px-4 py-2">
+      <span className="bg-red-600 rounded text-white px-4 py-2">
         {state.modalContent}
       </span>
     );
@@ -41,7 +41,7 @@ export default function AddTask() {
   return (
     <form
       onSubmit={processTask}
-      className="border-black border-2 p-4 text-center mt-4"
+      className="border-black border-2 rounded p-4 text-center mt-4"
     >
       {state.isModalOpen && <Modal />}
       <br />
@@ -50,7 +50,7 @@ export default function AddTask() {
         value={newtask}
         placeholder="Enter new to-do..."
         onChange={(e) => addnew(e.target.value)}
-        className=" border-black pl-2 border-2 mb-2 mt-4 w-3/5 h-10"
+        className="w-full  lg:w-3/5 md:w-4/5 border-black rounded pl-2 border-2 mb-2 mt-4  h-10"
       />
       <br />
       <button className="px-6 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">
