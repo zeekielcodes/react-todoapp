@@ -1,3 +1,26 @@
+# To Do App
+
+### Screenshot
+
+![](./src/screenshot.png)
+
+### Link
+
+- Live Site URL: [Visit live site](https://theface-react-todo.netlify.app)
+
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- React JS
+
+## Author
+
+- Portfolio - [Ezekiel The Face](https://thefacecodes.web.app)
+- Twitter - [@thefacecodes](https://www.twitter.com/thefacecodes)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
